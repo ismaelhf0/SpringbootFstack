@@ -44,7 +44,7 @@ public class CustomerController {
                 @PathVariable("customerId") Integer customerId) {
                 customerService.deleteCustomerById(customerId);
        }
-
+    //this is the put method
        @PutMapping("{customerId}")
         public  void deleteCustomer(
             @PathVariable("customerId") Integer customerId,
