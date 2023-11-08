@@ -23,7 +23,7 @@ public class CustomerService {
     // Constructor to inject CustomerDao dependency
 
 
-    public CustomerService( @Qualifier("jpa") CustomerDao customerDao) {
+    public CustomerService(@Qualifier("jdbc") CustomerDao customerDao) {
         this.customerDao = customerDao;
     }
 // Implementation of getAllCustomers method

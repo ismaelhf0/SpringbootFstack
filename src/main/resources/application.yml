@@ -4,11 +4,14 @@ server:
 error:
   include-message: always
 
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/customer
     username: ismaelDev
     password: password
+  flyway:
+      baselineOnMigrate: true
   jpa:
     hibernate:
       ddl-auto: validate

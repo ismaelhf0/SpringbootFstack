@@ -2,14 +2,15 @@ package com.amigoscode;
 
 import com.amigoscode.customer.Customer;
 import com.amigoscode.customer.CustomerRepository;
-import org.aspectj.bridge.ICommand;
+import com.github.javafaker.Faker;
+import com.github.javafaker.Name;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
-import java.util.List;
+
+import java.util.Random;
 
 
 @SpringBootApplication
@@ -26,21 +27,26 @@ public class Main {
 CommandLineRunner runner(CustomerRepository customerRepository){
 
     return args -> {
-        Customer alex = new Customer(
-                "alex",
-                "alex@gmail.com",
-                21
+        for (int i = 0; i < 5 ; i++) {
+            var faker =  new Faker();
+            var name = faker.name();
+            Random rAge = new Random();
+            int result = rAge.nextInt(16,99);
+            Name name1 = faker.name();
+            String firstName = name1.firstName();
+            String lastName = name1.lastName();
+            Customer customer = new Customer(
+                    firstName + " " +lastName,
+                    firstName.toLowerCase() + "." + lastName.toLowerCase() + "@gmail.com",
+                    result
 
-        );
-        Customer jamila = new Customer(
-                "jamila",
+            );
 
-                "jamila@gmail.com",
-                23
 
-        );
-        List<Customer> customers = List.of(alex, jamila);
-        customerRepository.saveAll(customers);
+
+            customerRepository.save(customer);
+        }
+
     };
 }
     //lets create a apps config context

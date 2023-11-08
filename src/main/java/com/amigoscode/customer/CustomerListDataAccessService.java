@@ -19,10 +19,11 @@ public class CustomerListDataAccessService implements CustomerDao  {
 
     static {
 
+
         customers = new ArrayList<>();
 
         Customer alex = new Customer(
-                1,
+                1L,
                 "alex",
                 "alex@gmail.com",
                 21
@@ -30,7 +31,7 @@ public class CustomerListDataAccessService implements CustomerDao  {
         );
         customers.add(alex);
         Customer jamila = new Customer(
-                2,
+                2L,
                 "jamila",
                 "jamila@gmail.com",
                 23

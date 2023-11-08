@@ -5,6 +5,9 @@ package com.amigoscode.customer;
 import jakarta.persistence.*;
 
 import java.util.Objects;
+
+import static jakarta.persistence.GenerationType.*;
+
 // Define the Customer class
 @Entity
 @Table(
@@ -25,9 +28,9 @@ public class Customer {
 
             allocationSize = 1
     )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+    @GeneratedValue(strategy = SEQUENCE,
             generator = "customer_id_seq")
-    private Integer id ;
+    private Long id ;
     @Column(
             nullable = false
     )
@@ -51,7 +54,7 @@ public class Customer {
 
     }
     // Parameterized constructor
-    public Customer(Integer id, String name, String email, Integer age) {
+    public Customer(Long id, String name, String email, Integer age) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -60,7 +63,6 @@ public class Customer {
 
     //lets past another constructor without the id
     public Customer( String name, String email, Integer age) {
-        this.id = id;
         this.name = name;
         this.email = email;
         this.age = age;
@@ -70,11 +72,11 @@ public class Customer {
  equals, hashCode, and toString methods,
  here lets have getter and setters*/
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
