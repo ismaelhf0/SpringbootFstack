@@ -19,7 +19,7 @@ import static jakarta.persistence.GenerationType.*;
                 )
         }
 )
-public class Customer {
+public class   Customer {
     // Define private fields
     @Id
     @SequenceGenerator(

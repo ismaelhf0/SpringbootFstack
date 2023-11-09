@@ -5,29 +5,45 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
+
 @Repository("jdbc")
 
 public class CustomerJDBCDataAccessService implements CustomerDao {
 
     private final  JdbcTemplate jdbcTemplate ;
+    private final  customerRowMapper customerRowMapper;
 
-    public CustomerJDBCDataAccessService(JdbcTemplate jdbcTemplate) {
+    public CustomerJDBCDataAccessService(JdbcTemplate jdbcTemplate, com.amigoscode.customer.customerRowMapper customerRowMapper) {
         this.jdbcTemplate = jdbcTemplate;
+        this.customerRowMapper = customerRowMapper;
     }
 
     @Override
     public List<Customer> selectAllCustomers() {
-        return null;
+        var sql = """
+                SELECT id, email, name, age
+                FROM customer
+                         """;
+        return jdbcTemplate.query(sql, customerRowMapper);
     }
 
     @Override
     public Optional<Customer> selectCustomerById(Integer id) {
-        return Optional.empty();
+        var sql = """
+                SELECT id, email, name, age
+                FROM customer
+                WHERE id = ?
+                         """;
+
+        return jdbcTemplate.query(sql, customerRowMapper, id)
+                .stream()
+                .findFirst();
     }
     //in order to test this we have to change the qualifier from jpa to jdbc
     @Override
     public void insertCustomer(Customer customer) {
-    var  sql ="""
+    var  sql =""" 
               INSERT INTO customer(name, email, age )
               VALUES ( ?, ?, ?)
               """;
