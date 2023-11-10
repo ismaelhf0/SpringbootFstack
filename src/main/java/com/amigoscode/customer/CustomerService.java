@@ -70,12 +70,15 @@ public class CustomerService {
     public void updateCustomer(Integer customerId,
                                 CustomerUpdateRequest updateRequest) {
         Customer customer = getCustomer(customerId);
-            boolean changes =false;
-         if (updateRequest.name() != null && !updateRequest.name().equals(customer))
-         customer.setName(updateRequest.name());
-         changes = true;
-
-
+            boolean changes = false;
+         if (updateRequest.name() != null && !updateRequest.name().equals(customer))  {
+             customer.setName(updateRequest.name());
+             changes = true;
+         }
+        if (updateRequest.age() != null && !updateRequest.age().equals(customer))  {
+            customer.setAge(updateRequest.age());
+            changes = true;
+        }
 
              if (updateRequest.email() !=null && !updateRequest.email().equals(customer))
                  if (customerDao.existsPersonWithEmail(updateRequest.email())) {
